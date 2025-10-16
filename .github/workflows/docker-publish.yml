@@ -29,4 +29,4 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/base-node-chromium:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/base-node-chromium:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/base-node-chromium:trixie-chromium-standalone
