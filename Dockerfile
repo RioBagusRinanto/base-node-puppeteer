@@ -2,13 +2,12 @@
 FROM node:lts-alpine
 
 # Install Chromium and minimal system dependencies
-RUN apk add --no-cache chromium glob
+RUN apk add --no-cache \
+    chromium   
+
 
 # Set working directory
 WORKDIR /usr/src/app
-
-# Install latest glob package
-RUN npm install -g glob@latest
 
 # Copy project files (if any)
 COPY . .
