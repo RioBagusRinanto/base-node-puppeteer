@@ -7,6 +7,9 @@ RUN apk add --no-cache \
 
 RUN apk update --all && apk upgrade --all
 
+RUN npm install -g glob@latest \
+    && npm cache clean --force
+
 
 # Set working directory
 WORKDIR /usr/src/app
