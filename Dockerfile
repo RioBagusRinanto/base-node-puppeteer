@@ -1,13 +1,14 @@
-# Base Node image (Debian-based for apt support)
-FROM node:trixie-slim
+# Base Node image
+FROM node:lts-alpine
 
 # Install Chromium and minimal system dependencies
-RUN apt-get update && apt-get install -y \
-    chromium 
-
+RUN apk add --no-cache chromium glob
 
 # Set working directory
 WORKDIR /usr/src/app
+
+# Install latest glob package
+RUN npm install -g glob@latest
 
 # Copy project files (if any)
 COPY . .
