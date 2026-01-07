@@ -5,6 +5,8 @@ FROM node:lts-alpine
 RUN apk add --no-cache \
     chromium   
 
+RUN apk update --all && apk upgrade --all
+
 
 # Set working directory
 WORKDIR /usr/src/app
