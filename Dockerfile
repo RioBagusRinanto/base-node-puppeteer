@@ -1,27 +1,22 @@
-# Base Node image
 FROM node:lts-alpine
 
-# Install Chromium and minimal system dependencies
+# Install Chromium and required fonts in a single layer
+# Keep packages to a minimum for smaller images
 RUN apk add --no-cache \
-    chromium   
+    chromium \
+    ttf-freefont \
+    msttcorefonts-installer
 
-RUN apk update --all && apk upgrade --all
-
-RUN npm install -g glob@latest \
-    && npm cache clean --force
-
-
-# Set working directory
+# App directory
 WORKDIR /usr/src/app
 
-# Copy project files (if any)
+# Copy project files
 COPY . .
 
+# Puppeteer/Chrome settings
+ENV CHROME_PATH=/usr/bin/chromium \
+    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium \
+    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
-# Set environment variables for Chrome
-ENV CHROME_PATH=/usr/bin/chromium
-ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-
-# Default command — you can override this in derived images
+# Default command (inspect node version by default)
 CMD ["node", "--version"]
